@@ -1,0 +1,60 @@
+@import "../../common.scss";
+
+.HeaderLinks {
+  font-size: 1.1rem;
+
+  &__linkList {
+    // &__linkList 내의 breakpoint
+    @include breakpoint("mobile") {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      padding: 0px 30px 0px 10px;
+      z-index: 1000;
+
+      background-color: $white;
+
+      li {
+        width: 100%;
+        padding: 10px 8px;
+        border-bottom: 1px solid $borderColor;
+
+        a {
+          display: inline-block;
+          color: $grey;
+        }
+      }
+    }
+
+    @include breakpoint("tablet") {
+      display: block;
+
+      li {
+        display: inline-block;
+        padding: 8px;
+      }
+
+      a {
+        color: $grey;
+      }
+    }
+
+    a:hover {
+      color: $orange;
+    }
+  }
+
+  &__disabled {
+    color: $grey;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  a:visited {
+    color: $grey;
+  }
+  .selected {
+    color: $orange;
+  }
+}

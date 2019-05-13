@@ -1,0 +1,91 @@
+@import "../../common.scss";
+
+.Header {
+  position: fixed;
+  width: 100%;
+  min-width: 360px;
+  height: 60px;
+  top: 0;
+  border-bottom: 1px solid $borderColor;
+
+  transition: top 0.6s;
+  z-index: 1050;
+
+  background-color: $white;
+
+  &__logo {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: $orange;
+    text-decoration: none;
+    transform: translateY(-50%);
+
+    // &__logo 클래스에 적용될 breakpoint
+    @include breakpoint("desktop") {
+      left: 150px;
+    }
+  }
+
+  &__menuButton {
+    // &__menuButton 클래스에 적용될 breakpoint
+    @include breakpoint("mobile") {
+      font-size: 25px;
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      cursor: pointer;
+
+      color: $dark;
+    }
+
+    @include breakpoint("tablet") {
+      display: none;
+    }
+  }
+
+  &__links {
+    // &__links 클래스에 적용될 breakpoint
+    @include breakpoint("mobile") {
+      display: none;
+    }
+
+    @include breakpoint("tablet") {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+    @include breakpoint("desktop") {
+      right: 150px;
+    }
+  }
+
+  &__dropMenu {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s ease 300ms, opacity 300ms;
+
+    // &__dropMenu 클래스에 적용될 breakpoint
+    @include breakpoint("tablet") {
+      display: none;
+    }
+  }
+}
+
+// Header가 스크롤 내려갈 때 숨기기 위한 위치
+.hidden {
+  top: -100px;
+}
+
+// 모바일 뷰에서 메뉴버튼 눌렀을 시에 애니메이션 효과
+.show {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s ease 0s, opacity 300ms;
+}
