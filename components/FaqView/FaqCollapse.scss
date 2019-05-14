@@ -1,0 +1,41 @@
+@import "../../common.scss";
+
+.Collapse {
+  font-size: 1.1rem;
+
+  &__body {
+    padding: 20px 20px 0px 0px;
+
+    &__title {
+      padding: 0px 0px 20px 20px;
+
+      border-bottom: 1px dashed $lightGrey;
+      cursor: pointer;
+
+      span:first-child {
+        font-size: 1.2rem;
+        padding-right: 25px;
+        color: $orange;
+      }
+
+      span:nth-child(2) {
+        padding-right: 30px;
+      }
+
+      &__text--selected {
+        color: $orange;
+      }
+    }
+
+    &__content {
+      padding: 30px 20px 30px 150px;
+      border-bottom: 1px dashed $lightGrey;
+      line-height: 1.5;
+
+      // &__content 클래스에 적용될 breakpoint
+      @include breakpoint("mobile") {
+        padding: 20px;
+      }
+    }
+  }
+}

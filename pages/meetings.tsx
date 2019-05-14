@@ -1,7 +1,7 @@
 import { NextFunctionComponent } from "next";
 import MeetingsView from "../components/MeetingsView";
 import { IClub } from "../interfaces";
-import { getAll } from "../utils/mockData";
+import { getClubList } from "../utils/mockData";
 
 type MeetingsPageProps = {
   clubListData: IClub[];
@@ -12,7 +12,7 @@ const MeetingsPage: NextFunctionComponent<MeetingsPageProps> = ({
 }) => <MeetingsView clubList={clubListData} />;
 
 MeetingsPage.getInitialProps = async () => {
-  const clubListData: IClub[] = await getAll();
+  const clubListData: IClub[] = await getClubList();
 
   return { clubListData };
 };

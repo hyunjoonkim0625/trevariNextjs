@@ -1,0 +1,105 @@
+@import "../../common.scss";
+
+.FaqView {
+  width: 100%;
+  padding: 40px 15px 0px 15px;
+
+  margin: 0 auto;
+
+  &__container {
+    background-color: $white;
+
+    &__tabs {
+      text-align: center;
+      padding: 10px;
+      height: 75px;
+      button {
+        padding: 4px 10px;
+        font-size: 1.1rem;
+        width: 100px;
+        height: 53px;
+        border: none;
+      }
+
+      button:hover {
+        font-weight: 700;
+      }
+      .clicked {
+        font-weight: 700;
+        border-bottom: 2px solid $orange;
+      }
+    }
+
+    &__info {
+      margin: 15px 0px 20px 0px;
+      padding: 0px 15px;
+
+      text-align: center;
+      p {
+        margin-bottom: 10px;
+      }
+      p:nth-child(2) {
+        color: $orange;
+      }
+
+      a {
+        color: $blue;
+      }
+    }
+
+    &__categoryMenu {
+      text-align: center;
+      button {
+        margin: 5px 5px;
+        padding: 4px 10px;
+        font-size: 1rem;
+        height: 35px;
+        border: 1px solid $orange;
+        border-radius: 4px;
+
+        background-color: $white;
+        color: $orange;
+      }
+
+      button:hover,
+      button:focus,
+      .selected {
+        transition: all 0.4s ease;
+        color: $white;
+        background-color: $orange;
+      }
+      .selected:hover {
+        background-color: #df7500;
+        border-color: #d26e00;
+      }
+    }
+  }
+
+  // 미디어 쿼리
+
+  @include breakpoint("mobile") {
+    max-width: 90%;
+    padding: 0 30px;
+  }
+
+  @include breakpoint("tablet") {
+    max-width: 90%;
+
+    &__categoryContent {
+      margin-top: 20px;
+      padding: 20px 15px 20px 15px;
+    }
+  }
+
+  @include breakpoint("laptop") {
+    max-width: 90%;
+
+    padding-left: 80px;
+    padding-right: 80px;
+
+    &__categoryContent {
+      margin-top: 20px;
+      padding: 20px 15px 20px 15px;
+    }
+  }
+}

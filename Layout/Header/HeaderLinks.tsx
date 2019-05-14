@@ -56,11 +56,13 @@ class HeaderLinks extends React.Component<HeaderLinksProps, HeaderLinksState> {
           {headerLinkMenu.map(menu =>
             menu === "독서 모임" ? (
               <Link href="/meetings" key={menu}>
-                <li onClick={() => this.handleChangeMenu(menu)}>
-                  <span className={currentMenu === menu ? "selected" : ""}>
-                    {menu}
-                  </span>
-                </li>
+                <a>
+                  <li onClick={() => this.handleChangeMenu(menu)}>
+                    <span className={currentMenu === menu ? "selected" : ""}>
+                      {menu}
+                    </span>
+                  </li>
+                </a>
               </Link>
             ) : (
               <li key={menu}>

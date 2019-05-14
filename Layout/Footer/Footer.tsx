@@ -11,7 +11,9 @@ const Footer: NextFunctionComponent = () => (
     <div className="Footer__vision">
       <span>세상을 더 지적으로 사람들을 더 친하게</span>
       <Link href="/faq">
-        <Button scrollStepInPx={50} delayInMs={20} />
+        <a>
+          <Button scrollStepInPx={50} delayInMs={20} />
+        </a>
       </Link>
     </div>
     <div className="Footer__divider" />

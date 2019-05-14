@@ -484,12 +484,19 @@ export const faqContentData: IFaq[] = [
   }
 ];
 
-// get all data
-
-export async function getAll() {
+// get all clubList data
+export async function getClubList() {
   if (!Array.isArray(clubListData)) {
     throw new Error("정보를 찾을 수 없습니다.");
   }
 
   return clubListData;
+}
+
+export async function getFaqContent() {
+  if (!Array.isArray(faqContentData)) {
+    throw new Error("정보를 찾을 수 없습니다.");
+  }
+
+  return faqContentData;
 }
