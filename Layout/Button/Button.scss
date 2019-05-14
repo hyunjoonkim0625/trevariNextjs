@@ -1,0 +1,19 @@
+@import "../../common.scss";
+
+.Button {
+  font-size: 1rem;
+  padding: 4px 10px;
+  height: 35px;
+  border: 1px solid $orange;
+  border-radius: 4px;
+
+  background-color: $white;
+  color: $orange;
+}
+
+.Button:hover,
+.Button:focus {
+  transition: all 0.4s ease;
+  background-color: $orange;
+  color: $white;
+}

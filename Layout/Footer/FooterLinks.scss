@@ -1,0 +1,14 @@
+@import "../../common.scss";
+
+.FooterLinks {
+  a {
+    color: $grey;
+  }
+  a:hover {
+    color: $orange;
+  }
+
+  p {
+    padding: 8px 0px;
+  }
+}

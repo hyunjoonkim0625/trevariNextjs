@@ -1,0 +1,90 @@
+@import "../../common.scss";
+
+.Footer {
+  padding: 25px 10px 0px 10px;
+
+  &__vision {
+    overflow: auto;
+
+    span {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+
+      color: $lightDark;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 4px 10px;
+      height: 35px;
+      border: 1px solid $orange;
+      border-radius: 4px;
+
+      background-color: $white;
+      color: $orange;
+    }
+
+    button:hover,
+    button:focus {
+      transition: all 0.4s ease;
+      background-color: $orange;
+      color: $white;
+    }
+
+    // &__vision 클래스의 적용될 breakpoint
+    @include breakpoint("mobile") {
+      span {
+        display: block;
+      }
+      button {
+        float: left;
+      }
+    }
+
+    @include breakpoint("tablet") {
+      span {
+        float: left;
+      }
+      button {
+        float: right;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  &__divider {
+    clear: both;
+  }
+
+  &__links {
+    margin-top: 20px;
+  }
+
+  img {
+    height: 30px;
+    width: 30px;
+    margin: 10px 10px 0px 0px;
+  }
+
+  &__info,
+  &__contact,
+  &__copyright {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+
+    color: $lightGrey;
+
+    span {
+      color: $blue;
+    }
+    span:hover {
+      color: $orange;
+    }
+  }
+
+  @include breakpoint("desktop") {
+    padding: 50px 150px 0px 150px;
+  }
+}
