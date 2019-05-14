@@ -483,3 +483,13 @@ export const faqContentData: IFaq[] = [
     category: "아지트"
   }
 ];
+
+// get all data
+
+export async function getAll() {
+  if (!Array.isArray(clubListData)) {
+    throw new Error("정보를 찾을 수 없습니다.");
+  }
+
+  return clubListData;
+}

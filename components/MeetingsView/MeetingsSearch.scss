@@ -1,0 +1,64 @@
+@import "../../common.scss";
+
+.Search {
+  margin-top: 10px;
+  &__input,
+  &__submit {
+    display: inline-block;
+    font-size: 1rem;
+    // border-radius: 0;
+    vertical-align: middle;
+  }
+
+  &__input {
+    padding: 10px 15px;
+    border: 1px solid $borderColor;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  // search input의 크기를 맞춰주기 위한 스타일링
+  &__submit {
+    padding: 9px 15px;
+    border: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    cursor: pointer;
+
+    background-color: $orange;
+    color: $white;
+  }
+
+  &__submit:hover {
+    transition: all 0.4s ease;
+    background-color: rgb(211, 118, 37);
+  }
+
+  /**
+ * Firefox Fix
+ * Without that the submit button will be too high.
+ */
+  &__submit::-moz-focus-inner {
+    border: 0;
+  }
+}
+
+// responsive view
+
+@include breakpoint("mobile") {
+  .Search {
+    &__input {
+      width: calc(100% - 61px);
+    }
+
+    &__submit {
+      width: 61px;
+    }
+  }
+}
+
+@include breakpoint("tablet") {
+  .Search {
+    float: right;
+  }
+}
