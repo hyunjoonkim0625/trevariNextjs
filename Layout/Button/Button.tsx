@@ -1,5 +1,5 @@
 import React from "react";
-import Router, { withRouter } from "next/router";
+// import Router, { withRouter } from "next/router";
 import "./Button.scss";
 
 type ButtonProps = {
@@ -31,19 +31,12 @@ class Button extends React.Component<ButtonProps, ButtonState> {
     this.setState({ intervalId: intervalId });
   }
 
-  // shallowRouting(): void {
-  //   const href = `/faq`;
-
-  //   Router.push(href, href, { shallow: true });
-  // }
-
   render() {
     return (
       <button
         className="Button"
         onClick={() => {
           this.scrollToTop();
-          // this.shallowRouting();
         }}
       >
         자주 묻는 질문 &#38; 공지사항
