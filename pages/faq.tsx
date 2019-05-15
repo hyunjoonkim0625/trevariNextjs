@@ -15,7 +15,7 @@ const FaqPage: NextFunctionComponent<FaqPageProps> = ({ faqContentData }) => (
 
 FaqPage.getInitialProps = async () => {
   const faqContentData: IFaq[] = await getFaqContent();
-
+  console.log("getinitialprops");
   return { faqContentData };
 };
 
