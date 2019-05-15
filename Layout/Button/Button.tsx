@@ -3,8 +3,8 @@ import React from "react";
 import "./Button.scss";
 
 type ButtonProps = {
-  scrollStepInPx: number;
-  delayInMs: number;
+  scrollStepInPx: any;
+  delayInMs: any;
 };
 
 type ButtonState = {

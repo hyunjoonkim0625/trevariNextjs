@@ -1,5 +1,5 @@
 import { NextFunctionComponent } from "next";
-import { withRouter } from "next/router";
+import { withRouter, WithRouterProps } from "next/router";
 import Link from "next/link";
 
 import FooterLinks from "./FooterLinks";
@@ -7,8 +7,11 @@ import Button from "../Button";
 
 import "./Footer.scss";
 
-const Footer: NextFunctionComponent = ({ router }) => {
-  console.log(router.asPath);
+interface OwnProps {}
+
+type CombineProps = OwnProps & Required<WithRouterProps>;
+
+const Footer: NextFunctionComponent<CombineProps> = ({ router }) => {
   return (
     <div className="Footer">
       <div className="Footer__vision">

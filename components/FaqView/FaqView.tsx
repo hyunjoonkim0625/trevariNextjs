@@ -26,7 +26,8 @@ type FaqViewState = {
 class FaqView extends React.Component<FaqViewProps, FaqViewState> {
   state = {
     currentTab: "faq",
-    displayCategory: "북클럽"
+    displayCategory: "북클럽",
+    intervalId: 0
   };
 
   handleChangeCategory = (category: string): void => {
