@@ -31,7 +31,8 @@ class MeetingsView extends React.Component<
     const { clubList } = this.props;
 
     this.setState({
-      currentlyShownList: clubList
+      currentlyShownList: clubList,
+      loading: false
     });
 
     window.addEventListener("scroll", this.onScroll, false);
@@ -100,65 +101,66 @@ class MeetingsView extends React.Component<
           <MeetingsSearch handleSearch={this.handleSearch} />
         </div>
 
-        {/* 검색 결과 유무에 따른 조건부 렌더링 */}
-        {hasData ? (
-          // 이미지가 로드가 된 후에 콘텐츠를 화면에 렌더하기 위핸 클래스 추가
-          <div
-            className={`MeetingsView__clubList${loading ? "--loading" : ""}`}
-          >
-            {/* FIXED: currentlyShownList가 없는 경우가 없을 것 같아 해당 체킹은 생략해도 괜찮을 것 같아요. */}
-            {/* 초기 상태값에 []를 할당하기 때문에 */}
-            {currentlyShownList
-              .slice(0, items)
-              // FIXED: 여기도 any 자제! -> 맞는 방법일까?
+        {!loading ? (
+          hasData ? (
+            <div>
+              {/* FIXED: currentlyShownList가 없는 경우가 없을 것 같아 해당 체킹은 생략해도 괜찮을 것 같아요. */}
+              {/* 초기 상태값에 []를 할당하기 때문에 */}
+              {currentlyShownList
+                .slice(0, items)
+                // FIXED: 여기도 any 자제! -> 맞는 방법일까?
 
-              .map((item, index: number) => {
-                return (
-                  // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                  <div className="MeetingsView__clubList__content" key={index}>
-                    <div className="MeetingsView__clubList__content__image">
-                      <img
-                        src={item.imgSrc}
-                        alt={item.bookTitle}
-                        onLoad={() =>
-                          this.setState({
-                            loading: false
-                          })
-                        }
-                      />
-                      {item.clubRep ? (
-                        <p className="MeetingsView__clubList__content__image__clubRep">
-                          클럽장 {item.clubRep}님
-                        </p>
-                      ) : null}
-                      {item.trevariDesigned ? (
-                        <p className="MeetingsView__clubList__content__image__trevari">
-                          트레바리가 디자인한 클럽
-                        </p>
-                      ) : null}
+                .map((item, index: number) => {
+                  return (
+                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                    <div
+                      className="MeetingsView__clubList__content"
+                      key={index}
+                    >
+                      <div className="MeetingsView__clubList__content__image">
+                        <img src={item.imgSrc} alt={item.bookTitle} />
+                        {item.clubRep ? (
+                          <p className="MeetingsView__clubList__content__image__clubRep">
+                            클럽장 {item.clubRep}님
+                          </p>
+                        ) : null}
+                        {item.trevariDesigned ? (
+                          <p className="MeetingsView__clubList__content__image__trevari">
+                            트레바리가 디자인한 클럽
+                          </p>
+                        ) : null}
 
-                      <div className="MeetingsView__clubList__content__image__clubInfo">
-                        <p>{item.clubName}</p>
-                        <p>{item.clubDescription}</p>
+                        <div className="MeetingsView__clubList__content__image__clubInfo">
+                          <p>{item.clubName}</p>
+                          <p>{item.clubDescription}</p>
+                        </div>
                       </div>
-                    </div>
 
-                    <p className="MeetingsView__clubList__content__bookTitle">
-                      {item.bookTitle}
-                    </p>
-                    <p className="MeetingsView__clubList__content__location">
-                      {item.location}
-                    </p>
-                    <p className="MeetingsView__clubList__content__time">
-                      {item.time}
-                    </p>
-                  </div>
-                );
-              })}
-          </div>
+                      <p className="MeetingsView__clubList__content__bookTitle">
+                        {item.bookTitle}
+                      </p>
+                      <p className="MeetingsView__clubList__content__location">
+                        {item.location}
+                      </p>
+                      <p className="MeetingsView__clubList__content__time">
+                        {item.time}
+                      </p>
+                    </div>
+                  );
+                })}
+            </div>
+          ) : (
+            <div className="MeetingsView__notFound">
+              <div>검색 결과가 없습니다.</div>
+            </div>
+          )
         ) : (
-          <div className="MeetingsView__notFound">
-            <div>검색 결과가 없습니다.</div>
+          <div className="spinner">
+            <div className="rect1" />
+            <div className="rect2" />
+            <div className="rect3" />
+            <div className="rect4" />
+            <div className="rect5" />
           </div>
         )}
       </div>
@@ -167,3 +169,64 @@ class MeetingsView extends React.Component<
 }
 
 export default MeetingsView;
+
+// {
+//   hasData ? (
+//     // 이미지가 로드가 된 후에 콘텐츠를 화면에 렌더하기 위핸 클래스 추가
+//   <div>
+//     {/* FIXED: currentlyShownList가 없는 경우가 없을 것 같아 해당 체킹은 생략해도 괜찮을 것 같아요. */}
+//     {/* 초기 상태값에 []를 할당하기 때문에 */}
+//     {currentlyShownList
+//       .slice(0, items)
+//       // FIXED: 여기도 any 자제! -> 맞는 방법일까?
+
+//       .map((item, index: number) => {
+//         return (
+//           // eslint-disable-next-line jsx-a11y/anchor-is-valid
+//           <div className="MeetingsView__clubList__content" key={index}>
+//             <div className="MeetingsView__clubList__content__image">
+//               <img
+//                 src={item.imgSrc}
+//                 alt={item.bookTitle}
+//                 onLoad={() =>
+//                   this.setState({
+//                     loading: false
+//                   })
+//                 }
+//               />
+//               {item.clubRep ? (
+//                 <p className="MeetingsView__clubList__content__image__clubRep">
+//                   클럽장 {item.clubRep}님
+//                       </p>
+//               ) : null}
+//               {item.trevariDesigned ? (
+//                 <p className="MeetingsView__clubList__content__image__trevari">
+//                   트레바리가 디자인한 클럽
+//                       </p>
+//               ) : null}
+
+//               <div className="MeetingsView__clubList__content__image__clubInfo">
+//                 <p>{item.clubName}</p>
+//                 <p>{item.clubDescription}</p>
+//               </div>
+//             </div>
+
+//             <p className="MeetingsView__clubList__content__bookTitle">
+//               {item.bookTitle}
+//             </p>
+//             <p className="MeetingsView__clubList__content__location">
+//               {item.location}
+//             </p>
+//             <p className="MeetingsView__clubList__content__time">
+//               {item.time}
+//             </p>
+//           </div>
+//         );
+//       })}
+//   </div>
+// ) : (
+//     <div className="MeetingsView__notFound">
+//       <div>검색 결과가 없습니다.</div>
+//     </div>
+//     )
+// }
