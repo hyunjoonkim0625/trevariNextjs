@@ -18,7 +18,7 @@ const Footer: NextFunctionComponent<CombineProps> = ({ router }) => {
         <span>세상을 더 지적으로 사람들을 더 친하게</span>
         <Link href="/faq" shallow={router.asPath === "/faq"}>
           <a>
-            <Button scrollStepInPx="50" delayInMs="20" />
+            <Button />
           </a>
         </Link>
       </div>

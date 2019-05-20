@@ -2,47 +2,8 @@ import React from "react";
 
 import "./Button.scss";
 
-type ButtonProps = {
-  scrollStepInPx: any;
-  delayInMs: any;
-};
-
-type ButtonState = {
-  intervalId: any;
-};
-
-class Button extends React.Component<ButtonProps, ButtonState> {
-  state = {
-    intervalId: 0
-  };
-
-  scrollStep(): void {
-    if (window.pageYOffset === 0) {
-      clearInterval(this.state.intervalId);
-    }
-    window.scroll(0, window.pageYOffset - this.props.scrollStepInPx);
-  }
-
-  scrollToTop(): void {
-    let intervalId = setInterval(
-      this.scrollStep.bind(this),
-      this.props.delayInMs
-    );
-    this.setState({ intervalId: intervalId });
-  }
-
-  render() {
-    return (
-      <button
-        className="Button"
-        onClick={() => {
-          this.scrollToTop();
-        }}
-      >
-        자주 묻는 질문 &#38; 공지사항
-      </button>
-    );
-  }
-}
+const Button = () => (
+  <button className="Button">자주 묻는 질문 &#38; 공지사항</button>
+);
 
 export default Button;
