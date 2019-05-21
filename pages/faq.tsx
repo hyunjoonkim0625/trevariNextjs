@@ -1,22 +1,7 @@
 import { NextFunctionComponent } from "next";
 
-import { IFaq } from "../interfaces";
-import { getFaqContent } from "../utils/mockData";
-
 import FaqView from "../components/FaqView";
 
-type FaqPageProps = {
-  faqContentData: IFaq[];
-};
-
-const FaqPage: NextFunctionComponent<FaqPageProps> = ({ faqContentData }) => (
-  <FaqView faqContent={faqContentData} />
-);
-
-FaqPage.getInitialProps = async () => {
-  const faqContentData: IFaq[] = await getFaqContent();
-  console.log("getinitialprops");
-  return { faqContentData };
-};
+const FaqPage: NextFunctionComponent = () => <FaqView />;
 
 export default FaqPage;
