@@ -1,40 +1,38 @@
 import React from "react";
+import { inject, observer } from "mobx-react";
 import { IClub } from "../../interfaces";
 
 import MeetingsSearch from "./MeetingsSearch";
 
 import "./MeetingsView.scss";
+import MeetingsStore from "../../stores/MeetingsStore";
 
-type MeetingsViewProps = {
+interface MeetingsViewProps {
   clubList: IClub[];
-};
+  meetingsStore: MeetingsStore;
+}
 
 type MeetingsViewState = {
-  currentlyShownList: IClub[];
   value?: string;
-  loading: boolean;
   items: number;
 };
+
+@inject("meetingsStore")
+@observer
 class MeetingsView extends React.Component<
   MeetingsViewProps,
   MeetingsViewState
 > {
   state = {
-    currentlyShownList: [] as IClub[],
     value: "",
-    loading: true,
     items: 5
   };
 
   // 컴포넌트가 렌더되었을 때 보여지는 아이템의 갯수를 제한
   componentDidMount() {
-    const { clubList } = this.props;
     const debouncedScroll = debounced(1000, this.onScroll);
 
-    this.setState({
-      currentlyShownList: clubList,
-      loading: false
-    });
+    this.props.meetingsStore.fetchClubList();
 
     window.addEventListener("scroll", debouncedScroll, false);
   }
@@ -48,29 +46,10 @@ class MeetingsView extends React.Component<
     // FIXED: 이런 콜백 함수의 경우 react에 타입이 이미 정의된 경우가 많아요. ex) React.FormEvent<HTMLInputElement>
     return (event: React.FormEvent<HTMLFormElement>): void => {
       event.preventDefault();
-
-      const defaultClubList = this.props.clubList;
-
-      const lowerCasedValue = value.toLowerCase();
-
-      const searchedList = defaultClubList.filter(item =>
-        item.clubName.toLowerCase().includes(lowerCasedValue)
-      );
-
-      const trimmedValue = value.trim();
-
-      // 검색창에 아무것도 입력이 안되었을 시에는 초기 목록을 불러온다
-      if (trimmedValue === "") {
-        this.setState({
-          currentlyShownList: defaultClubList
-        });
-      } else {
-        this.setState({
-          currentlyShownList: searchedList
-        });
-      }
+      this.props.meetingsStore.search(value);
     };
   };
+  // 렌더 시 화면 맨 상단으로
 
   // 스크롤이 화면 맨 아래에 도착했는지 확인하는 핸들러
   onScroll = (): void => {
@@ -85,7 +64,16 @@ class MeetingsView extends React.Component<
   };
 
   render() {
-    const { currentlyShownList, loading, items } = this.state;
+    const { items } = this.state;
+    const {
+      clubList,
+      searchedList,
+      isSearched,
+      state
+    } = this.props.meetingsStore;
+    const loading = state;
+
+    const currentlyShownList = isSearched === false ? clubList : searchedList;
     const hasData: boolean = currentlyShownList.length > 0 ? true : false;
 
     return (
@@ -102,7 +90,7 @@ class MeetingsView extends React.Component<
           <MeetingsSearch handleSearch={this.handleSearch} />
         </div>
 
-        {!loading ? (
+        {loading === "done" ? (
           hasData ? (
             <div>
               {/* FIXED: currentlyShownList가 없는 경우가 없을 것 같아 해당 체킹은 생략해도 괜찮을 것 같아요. */}
