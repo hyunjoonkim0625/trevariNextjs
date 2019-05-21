@@ -12,10 +12,10 @@ interface MeetingsViewProps {
   meetingsStore: MeetingsStore;
 }
 
-type MeetingsViewState = {
+interface MeetingsViewState {
   value?: string;
   items: number;
-};
+}
 
 @inject("meetingsStore")
 @observer
