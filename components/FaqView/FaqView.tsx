@@ -1,9 +1,11 @@
 import React from "react";
+import { inject, observer } from "mobx-react";
 import { IFaq } from "../../interfaces";
 
 import FaqCollapse from "./FaqCollapse";
 
 import "./FaqView.scss";
+import FaqStore from "../../stores/FaqStore";
 
 const faqCategoriesData: string[] = [
   "북클럽",
@@ -14,20 +16,27 @@ const faqCategoriesData: string[] = [
   "아지트"
 ];
 
-type FaqViewProps = {
+interface FaqViewProps {
   faqContent: IFaq[];
-};
+  faqStore: FaqStore;
+}
 
-type FaqViewState = {
+interface FaqViewState {
   currentTab: string;
   displayCategory: string;
-};
+}
 
+@inject("faqStore")
+@observer
 class FaqView extends React.Component<FaqViewProps, FaqViewState> {
   state = {
     currentTab: "faq",
     displayCategory: "북클럽"
   };
+
+  componentDidMount() {
+    this.props.faqStore.fetchFaqContent();
+  }
 
   handleChangeCategory = (category: string): void => {
     this.setState({
@@ -48,7 +57,7 @@ class FaqView extends React.Component<FaqViewProps, FaqViewState> {
   };
 
   render() {
-    const { faqContent } = this.props;
+    const { faqContent } = this.props.faqStore;
     const { displayCategory, currentTab } = this.state;
     return (
       <div className="FaqView">
